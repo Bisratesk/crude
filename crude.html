@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>to do list</title>
+</head>
+<body>
+    <div class=container id="list">   </div>
+    <script>
+   const header=document.createElement('h1')
+   header.innerHTML='To-Do list'
+   
+   const create=document.createElement('button')
+   create.innerHTML='store'
+
+   const read=document.createElement('button')
+   read.innerHTML='show'
+
+   const input=document.createElement('input')
+   input.type='text'
+   input.placeholder='enter your text'
+   input.id='things'
+
+   const result=document.getElementById('list')
+   result.appendChild(header)
+   result.appendChild(create)
+   result.appendChild(read)
+   result.appendChild(input)
+   
+     create.onclick=store
+     function store(){
+        const local=document.getElementById('things').value
+        localStorage.setItem('things',local)
+        alert('your stuff has been stored')
+     }
+    
+   read.onclick=print
+   function print(){
+    const value=localStorage.getItem('things')
+    const display=document.createElement('div')
+    display.innerHTML=value
+    result.appendChild(display)
+   
+    const update=document.createElement('button')
+    update.innerHTML='update'
+    display.appendChild(update)
+
+    update.onclick=evolve
+    function evolve(){
+        const revo=prompt('enter your updated value')
+        if( revo !== null){
+            localStorage.setItem('things',revo)
+            display.innerHTML=revo
+            display.appendChild(update)
+            display.appendChild(remove)
+        }
+    }
+   const remove= document.createElement('button')
+   remove.innerHTML='delete'
+   display.appendChild(remove)
+  
+   remove.onclick=trash
+   function trash(){
+    localStorage.removeItem('things')
+    display.remove()
+   }
+
+   }
+
+
+    </script>
+    
+</body>
+</html>
